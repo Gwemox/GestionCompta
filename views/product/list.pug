@@ -1,0 +1,19 @@
+include /layouts/header.pug
+
+<!-- Page Content -->
+.container
+    each product in products
+        .row.product
+            h3
+                | #{product.name}
+        .row
+            p
+                | #{product.category} fabriqué par #{product.manufacturer} est à #{product.price} € HT /unité (#{product.price*1.2} € TTC)
+        .row
+            p
+                | #{product.price} €
+            a.btn.btn-primary.col-4.offset-4(href='/product/' + product._id)
+                | Plus de détails / Acheter
+        hr
+
+include /layouts/footer.pug

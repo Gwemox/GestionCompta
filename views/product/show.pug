@@ -1,0 +1,39 @@
+include /layouts/header.pug
+
+<!-- Page Content -->
+.container
+    .row
+        h1
+            | #{product.name} à #{product.price} € HT/u
+        hr
+    .row
+        .col-4
+            h4
+                | Descriptions générales
+            ul
+                each prop in product.generalDesc
+                    li #{prop}
+        .col-4
+            h4
+                | Descriptions techniques
+            ul
+                each prop in product.technicalDesc
+                    li #{prop}
+
+        .col-4
+            h4
+                | Descriptions commerciales
+            ul
+                each prop in product.commercialDesc
+                    li #{prop}
+        hr
+        .row
+            h4.col-12 Passer commande de ce produit
+            form(method='POST' action='/order' id='orderForm').col-12
+                div.form-group
+                    label(for='quantity') Quantité:
+                    input#quantity.form-control(type='number', value='1' name='quantity' required)
+                input#product.form-control(type='hidden', value=product._id name='product' required)
+                button.btn.btn-primary(type='submit') Acheter
+
+include /layouts/footer.pug

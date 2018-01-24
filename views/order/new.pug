@@ -1,0 +1,70 @@
+include /layouts/header.pug
+<!-- Page Content -->
+.container
+    if order
+        .row
+            .col-6
+                p
+                    u Adresse de facturation :
+                    br
+                    if token.user.business
+                        | #{token.user.businessName}
+                    else
+                        | #{token.user.firstName} #{order.user.lastName}
+                    br
+                    | #{token.user.number} #{token.user.street}
+                    br
+                    | #{token.user.zip_code}, #{token.user.city}
+                    br
+                    | #{token.user.country.toUpperCase()}
+            .col-6
+                p
+                    u Adresse de livraison :
+                    br
+                    if token.user.business
+                        | #{token.user.businessName}
+                    else
+                        | #{token.user.firstName} #{order.user.lastName}
+                    br
+                    | #{token.user.number} #{token.user.street}
+                    br
+                    | #{token.user.zip_code}, #{token.user.city}
+                    br
+                    | #{token.user.country.toUpperCase()}
+        .container
+            - var priceTotalHt = 0;
+            - const TVA = 1.2;
+            table(style="width:100%")
+                tr
+                    th Référence
+                    th Produit
+                    th Quantité
+                    th Prix HT unitaire
+                    th Prix HT
+                    th Prix TTC
+                each product in order.products
+                    - priceTotalHt += product.product.price * product.quantity
+                    tr
+                        td #{product.product._id}
+                        td #{product.product.name}
+                        td #{product.quantity}
+                        td #{product.product.price} €
+                        td #{product.product.price * product.quantity} €
+                        td #{product.product.price * product.quantity * TVA} €
+                tr
+                    td TOTAL
+                    td
+                    td
+                    td
+                    td
+                        b #{priceTotalHt} €
+                    td
+                        b #{priceTotalHt * TVA} €
+
+            form(method='POST' action='/paid' id='orderForm').col-12
+                input#order.form-control.pull-right(type='hidden', value=order._id name='order' required)
+                button.btn.btn-primary.pull-right.btn-paid(type='submit') Payer - télécharger ma facture
+    else
+        .row
+            p.center Aucune commande en cours
+include /layouts/footer.pug

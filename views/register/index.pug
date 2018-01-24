@@ -1,0 +1,47 @@
+include /layouts/header.pug
+
+<!-- Page Content -->
+.container
+    form(method='POST' action='/api/register' id='registerForm')
+        div.form-group
+            label(for='firstname') Prénom :
+            input#firstname.form-control(type='text', placeholder='Prénom' name='firstName' required)
+        div.form-group
+            label(for='lastname') Nom :
+            input#lastname.form-control(type='text', placeholder='Nom' name='lastName' required)
+        div.form-group
+            label(for='birthDate') Date de naissance :
+            input#birthDate.form-control(type='date', placeholder='10/01/1997' name='birthDate' required)
+        div.form-group
+            label(for='business') Etes-vous une entreprise ?
+            input#business.form-control(type='checkbox' name='business')
+        div.form-group
+            label(for='businessName') Nom de l'entreprise :
+            input#businessName.form-control(type='text', placeholder='Nom de l\'entreprise', name='businessName')
+        div.form-group
+            label(for='email') Email:
+            input#email.form-control(type='email', placeholder='name@email.com' name='email' required)
+        div.form-group
+            label(for='pw') Password:
+            input#pw.form-control(type='password' name='password')
+        h2 Adresse :
+        div.form-group
+            label(for='number') Numéro :
+            input#number.form-control(type='number', placeholder='1' name='number' required)
+        div.form-group
+            label(for='street') Rue :
+            input#street.form-control(type='text', placeholder='Rue' name='street' required)
+        div.form-group
+            label(for='zip_code') Code postal :
+            input#zip_code.form-control(type='text', placeholder='69007' name='zip_code' required)
+        div.form-group
+            label(for='city') Ville :
+            input#city.form-control(type='text', placeholder='Lyon' name='city' required)
+        div.form-group
+            label(for='country') Pays :
+            input#country.form-control(type='text', value='France' name='country' required)
+        button.btn.btn-primary(type='submit') S'enregistrer
+
+script(src="static/js/register.js")
+
+include /layouts/footer.pug
